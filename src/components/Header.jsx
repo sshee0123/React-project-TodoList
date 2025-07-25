@@ -13,6 +13,7 @@ const Header = () => {
 export default Header;
 =======
 import "./Header.css";
+import { memo } from "react";
 
 const Header = () => {
   return (
@@ -23,5 +24,9 @@ const Header = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Header;
 >>>>>>> 07a5b35 (react-bite project)
+=======
+export default memo(Header);
+>>>>>>> bf6e887 (useMemo, useCallback 활용 최적화)

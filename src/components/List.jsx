@@ -54,7 +54,7 @@ export default List;
 =======
 import "./List.css";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import TodoItem from "./TodoItem";
 
 const List = ({ todos, onUpdate, onDelete }) => {
@@ -79,9 +79,29 @@ const List = ({ todos, onUpdate, onDelete }) => {
   // 필터링된 값 저장
   const filteredTodos = getFilteredData();
 
+  // useMemo 을 활용한 Memoization
+  const { totalCount, doneCount, notDoneCount } = useMemo(() => {
+    const totalCount = todos.length;
+    const doneCount = todos.filter((todo) => todo.isDone).length;
+    const notDoneCount = totalCount - doneCount;
+
+    return {
+      totalCount,
+      doneCount,
+      notDoneCount,
+    };
+  }, [todos]);
+  // 의존성 배열 : deps
+
   return (
     <div className="List">
       <h4>Todo List 💪</h4>
+      <div>
+        <div>total : {totalCount}</div>
+        <div>done : {doneCount}</div>
+        <div>notDone : {notDoneCount}</div>
+      </div>
+
       <input
         value={search}
         onChange={onCangeSearch}
