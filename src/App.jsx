@@ -1,6 +1,11 @@
 import "./App.css";
-
-import { useState, useRef, useReducer, useCallback } from "react";
+import {
+  useState,
+  useRef,
+  useReducer,
+  useCallback,
+  createContext,
+} from "react";
 import Header from "./components/Header";
 import List from "./components/List";
 import Editor from "./components/Editor";
@@ -40,6 +45,10 @@ function reducer(state, action) {
       return state;
   }
 }
+
+// Context 객체는 컴포넌트 외부에 생성
+// -> 컴포넌트 간의 데이터 전달하는 역할, 굳이 리렌더링 필요 없음
+export const TodoContext = createContext();
 
 function App() {
   // useState -> useReducer 활용으로 변경
@@ -126,8 +135,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+      <TodoContext.Provider value={{ todos, onCreate, onUpdate, onDelete }}>
+        <Editor />
+        <List />
+      </TodoContext.Provider>
     </div>
   );
 }
