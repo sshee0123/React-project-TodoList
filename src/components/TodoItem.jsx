@@ -1,8 +1,10 @@
-<<<<<<< HEAD
 import "./TodoItem.css";
-import { memo } from "react";
+import { memo, useContext } from "react";
+import { TodoDispatchContext } from "../App";
 
-const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
+const TodoItem = ({ id, isDone, content, date }) => {
+  const { onUpdate, onDelete } = useContext(TodoDispatchContext);
+
   const onChangeCheckbox = () => {
     onUpdate(id);
     console.log(id);
@@ -26,38 +28,6 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
   );
 };
 
-<<<<<<< HEAD
-export default TodoItem;
-=======
-import "./TodoItem.css";
-
-const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
-  const onChangeCheckbox = () => {
-    onUpdate(id);
-    console.log(id);
-  };
-
-  const onClickDeleteButton = () => {
-    onDelete(id);
-  };
-
-  return (
-    <div className="TodoItem">
-      <input
-        onChange={onChangeCheckbox}
-        checked={isDone}
-        type="checkbox"
-      ></input>
-      <div className="content">{content}</div>
-      <div className="date">{new Date(date).toLocaleDateString()}</div>
-      <button onClick={onClickDeleteButton}>삭제</button>
-    </div>
-  );
-};
-
-export default TodoItem;
->>>>>>> 07a5b35 (react-bite project)
-=======
 // 고차 컴포넌트 (HOC)
 // export default memo(TodoItem, (prevProps, nextProps) => {
 //   // 반환값에 따라, Props가 바뀌었는지 안바뀌었는지 판단
@@ -73,4 +43,3 @@ export default TodoItem;
 // });
 
 export default memo(TodoItem);
->>>>>>> bf6e887 (useMemo, useCallback 활용 최적화)
