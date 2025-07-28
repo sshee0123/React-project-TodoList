@@ -5,6 +5,7 @@ import {
   useReducer,
   useCallback,
   createContext,
+  useMemo,
 } from "react";
 import Header from "./components/Header";
 import List from "./components/List";
@@ -47,8 +48,10 @@ function reducer(state, action) {
 }
 
 // Context 객체는 컴포넌트 외부에 생성
-// -> 컴포넌트 간의 데이터 전달하는 역할, 굳이 리렌더링 필요 없음
-export const TodoContext = createContext();
+// TodoStateContext : 변화할 값
+// TodoDispatchContext : 변화하지 않을 값
+export const TodoStateContext = createContext();
+export const TodoDispatchContext = createContext();
 
 function App() {
   // useState -> useReducer 활용으로 변경
@@ -132,13 +135,20 @@ function App() {
     });
   }, []);
 
+  // App 컴포넌트 mount 이후에는 다시 재생성 하지 않도록
+  const memoizedDispatch = useMemo(() => {
+    return { onCreate, onUpdate, onDelete };
+  }, []);
+
   return (
     <div className="App">
       <Header />
-      <TodoContext.Provider value={{ todos, onCreate, onUpdate, onDelete }}>
-        <Editor />
-        <List />
-      </TodoContext.Provider>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={memoizedDispatch}>
+          <Editor />
+          <List />
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }
