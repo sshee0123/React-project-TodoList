@@ -14,3 +14,8 @@ If you are developing a production application, we recommend using TypeScript wi
 ## TodoList 화면
 
 <img width="543" height="653" alt="스크린샷 2025-07-28 오후 10 32 36" src="https://github.com/user-attachments/assets/3bd11fcc-464c-4476-94f7-ff2aa58b09d3" />
+
+## State
+<img width="1115" height="555" alt="image" src="https://github.com/user-attachments/assets/9986a0ca-ff73-4339-9105-2e8348680635" />
+
+<img width="1252" height="617" alt="image" src="https://github.com/user-attachments/assets/7dc81a84-24e0-4a79-8c7f-dd2d5d763fb4" />
